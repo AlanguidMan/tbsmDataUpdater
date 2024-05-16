@@ -94,7 +94,7 @@ else:
             data = security_wise_archive(current_date, current_date, symbol)
             file.write(f"\n{data}\n\n")
     SendMessageToTelegram("Sending file...")
-    SendTelegramFile(file)
+    SendTelegramFile(f"{current_date}.html")
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
