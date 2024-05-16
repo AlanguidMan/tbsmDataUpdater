@@ -17,7 +17,7 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     print(type(p))
     print("received data1")
     df=pd.DataFrame(p['data'])
-    selected_columns = ['mTIMESTAMP','CH_SYMBOL','CH_TOT_TRADED_QTY','COP_DELIV_QTY', 'COP_DELIV_PERC']
+    selected_columns = ['mTIMESTAMP','CH_SYMBOL','CH_TOT_TRADED_QTY','CH_TOT_TRADED_VAL','COP_DELIV_QTY', 'COP_DELIV_PERC']
     selected_data = df.loc[:, selected_columns].to_html()
     return selected_data
 
