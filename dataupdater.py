@@ -1,4 +1,4 @@
-import pandas as pd
+himport pandas as pd
 import json
 from datetime import datetime
 import os
@@ -63,7 +63,6 @@ ReceiverTelegramID2 = '@tbsmdeldata_bot'
 def SendMessageToTelegram(Message):
     try:
         Url = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendMessage?chat_id=" + str(ReceiverTelegramID)
-
         textdata ={ "text":Message}
         response = requests.request("POST",Url,params=textdata)
     except Exception as e:
@@ -71,11 +70,24 @@ def SendMessageToTelegram(Message):
         print(Message)
 
 
+def sendEmail():
+    sender = 'tradersbardataupdater@outlook.in'
+    recipient = "papoye8837@nweal.com"
+    message = "Hello world!"
+    email = EmailMessage()
+    email["From"] = sender
+    email["To"] = recipient
+    email["Subject"] = "Test Email"
+    email.set_content(message)
+    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+    smtp.starttls()
+    smtp.login(sender, "TradersbarStockMarket")
+    smtp.sendmail(sender, recipient, email.as_string())
+    smtp.quit()
+
 def SendTelegramFile(FileName):
     Documentfile={'document':open(FileName,'rb')}
-
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
-
     response = requests.request("POST",Fileurl,files=Documentfile)
 
 
@@ -98,17 +110,6 @@ else:
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
+    print("Sent message")
 
-sender = 'tradersbardataupdater@outlook.in'
-recipient = "papoye8837@nweal.com"
-message = "Hello world!"
-email = EmailMessage()
-email["From"] = sender
-email["To"] = recipient
-email["Subject"] = "Test Email"
-email.set_content(message)
-smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
-smtp.starttls()
-smtp.login(sender, "TradersbarStockMarket")
-smtp.sendmail(sender, recipient, email.as_string())
-smtp.quit()
+
