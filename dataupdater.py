@@ -109,6 +109,7 @@ else:
     SendTelegramFile(f"{current_date}.html")
     end_time = time.time()
     execution_time = end_time - start_time
+    sendEmail()
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     print("Sent message")
 
