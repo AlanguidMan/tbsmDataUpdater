@@ -5,8 +5,8 @@ import os
 from nsepython import nsefetch
 import requests
 import time
-import subprocess
-
+from email.message import EmailMessage
+import smtplib
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     base_url = "https://www.nseindia.com/api/historical/securityArchives"
@@ -54,9 +54,11 @@ holidays2024 = {
 
 #TelegramBotCredential = '5747611163:AAFqIPOxRGTXP25py8mNdXRL7mz-TfsouO8'
 TelegramBotCredential = '6883565174:AAGXuW07FEidJ3o8sNNbDTQZ0OpS9WacHj4'
+TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
+
 #my personal id
 ReceiverTelegramID = '@crontabjob01'
-#ReceiverTelegramID = 'nlClcjH-bxljNzZl'
+ReceiverTelegramID2 = '@tbsmdeldata_bot'
 
 def SendMessageToTelegram(Message):
     try:
@@ -100,5 +102,19 @@ end_time = time.time()
 execution_time = end_time - start_time
 SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
 
+sender = 'tradersbardataupdater@outlook.in'
+recipient = "papoye8837@nweal.com"
+message = "Hello world!"
 
+email = EmailMessage()
+email["From"] = sender
+email["To"] = recipient
+email["Subject"] = "Test Email"
+email.set_content(message)
+
+smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+smtp.starttls()
+smtp.login(sender, "TradersbarStockMarket")
+smtp.sendmail(sender, recipient, email.as_string())
+smtp.quit()
 
