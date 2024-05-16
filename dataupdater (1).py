@@ -82,9 +82,29 @@ def SendTelegramFile(FileName):
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 output_file_name=f"{current_date}.html"
-#output_file_name = f"{current_date}.html"
 
 
+if current_date in holidays2024:
+    SendMessageToTelegram(f"Wishing you a happy {holidays2024[current_date]}!")
+else:
+    with open(output_file_name, 'a') as file:
+        start_time = time.time()
+        for symbol in list:  # Assuming list is defined somewhere in your code
+            print(f"running {symbol.upper()}")
+            data = security_wise_archive("02-02-2024", "02-02-2024", symbol)
+            file.write(f"\n{data}\n\n")
+    SendMessageToTelegram("Sending file...")
+    SendTelegramFile(file)
+    end_time = time.time()
+    execution_time = end_time - start_time
+    SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
+
+
+
+
+
+
+"""
 with open(output_file_name, 'a') as file:
 
     start_time = time.time()
@@ -94,13 +114,7 @@ with open(output_file_name, 'a') as file:
         #data = security_wise_archive(current_date, current_date, symbol)
         #print(data)
         file.write(f"\n{data}\n\n")
-SendMessageToTelegram("Sending file...")
-SendTelegramFile(f"{current_date}.html")
-command = "find . -maxdepth 1 -type f -name '*.html' -exec rm {} \;"
-subprocess.run(command, shell=True)
-end_time = time.time()
-execution_time = end_time - start_time
-SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
+"""
 
 sender = 'tradersbardataupdater@outlook.in'
 recipient = "papoye8837@nweal.com"
