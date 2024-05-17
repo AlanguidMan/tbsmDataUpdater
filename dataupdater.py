@@ -118,8 +118,7 @@ else:
     
     sender = os.environ.get("EMAIL_SENDER")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-    recipient1 = os.environ.get("EMAIL_RECIPIENT")
-    recipient = "dotitebaj.jitavudon@rungel.net"
+    recipient = os.environ.get("EMAIL_RECIPIENT")
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
@@ -138,7 +137,8 @@ else:
     smtp.starttls()
     smtp.login(sender, EMAIL_PASSWORD)
     print("logged in successfully")
-    smtp.sendmail(sender, recipient, email.as_string())
+    print(f"sending mail to {recipient}")
+    #smtp.sendmail(sender, recipient, email.as_string())
     smtp.quit()
     SendTelegramFile(f"{current_date}.pdf")
     print("email sent")
