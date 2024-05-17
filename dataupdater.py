@@ -43,6 +43,7 @@ holidays2024 = {
     "11-04-2024": "Eid-Ul-Fitr (Ramzan Eid)",
     "17-04-2024": "Ram Navami",
     "01-05-2024": "Maharashtra Day",
+    "20-05-2024": "General Parliamentary Elections"
     "17-06-2024": "Bakri Eid",
     "17-07-2024": "Moharram",
     "15-08-2024": "Independence Day",
