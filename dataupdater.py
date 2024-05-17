@@ -15,11 +15,6 @@ import pdfkit
 #import subprocess
 import os
 
-current_date = datetime.now().strftime("%d-%m-%Y")
-print(current_date)
-#current_date= '16-05-2024'
-output_file_name=f"{current_date}.html"
-
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -57,8 +52,6 @@ holidays2024 = {
     "15-11-2024": "Gurunanak Jayanti",
     "25-12-2024": "Christmas",
 }
-
-
 
 
 my_list = [
@@ -100,6 +93,11 @@ def SendTelegramFile(FileName):
     print(Fileurl)
     response = requests.request("POST",Fileurl,files=Documentfile)
 
+current_date = datetime.now().strftime("%d-%m-%Y")
+print(current_date)
+#current_date= '16-05-2024'
+output_file_name=f"{current_date}.html"
+
 
 if current_date in holidays2024:
     SendMessageToTelegram(f"Wishing you a happy {holidays2024[current_date]}!")
@@ -125,12 +123,10 @@ else:
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
-    #email= MIMEMultipart('related')
     email["From"] = sender
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
     email.set_content(message)
-    #email.attach(MIMEText(html_content, 'html'))
     #subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
     pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
     with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2:
