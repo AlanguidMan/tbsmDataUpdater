@@ -73,7 +73,7 @@ my_list = [
 #TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
 TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
-ReceiverTelegramID2 = os.environ.get("ReceiverTelegramID2")
+ReceiverTelegramID = os.environ.get("ReceiverTelegramID")
 
 #ReceiverTelegramID = '@crontabjob01'
 
@@ -116,7 +116,8 @@ else:
     print(os.environ.get("EMAIL_SENDER"))
     sender = os.environ.get("EMAIL_SENDER")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-    recipient = os.environ.get("EMAIL_RECIPIENT")
+    recipient1 = os.environ.get("EMAIL_RECIPIENT")
+    print(recipient1)
     #sender = "tradersbardataupdater@outlook.in"
     #recipient = "papoye8837@nweal.com"
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
