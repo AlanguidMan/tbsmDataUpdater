@@ -80,22 +80,62 @@ def SendTelegramFile(FileName):
     response = requests.request("POST",Fileurl,files=Documentfile)
 
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
+def send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None):
+    print("Creating email message...")
+    # Create a multipart message
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+    msg['Subject'] = subject
 
-def send_email(sender_email, sender_password, receiver_email, subject, body= None, attachment_path=None):
-    msg = MIMEMultipart();msg['From']=sender_email;msg['To']=receiver_email;msg['Subject']=subject
-    msg.attach(MIMEText(body,'plain'))
+    # Add body to email
+    msg.attach(MIMEText(body, 'plain'))
+
     if attachment_path:
-        filename=attachment_path;attachment=open(filename,"rb")
-        part=MIMEBase('application','octet-stream');part.set_payload((attachment).read());encoders.encode_base64(part)
-        part.add_header('Content-Disposition',"attachment; filename= %s"%filename);msg.attach(part)
+        # Open the file to be sent
+        print(f"Received {attachment_path} as attachment")
+        print("Attaching file...")
+        filename = attachment_path
+        attachment = open(filename, "rb")
+
+        # Add attachment to message
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+        # Attach the attachment to the email
+        msg.attach(part)
+
+    # Connect to SMTP server
+    print("Connecting to SMTP server...")
     try:
-        server=smtplib.SMTP('smtp-mail.outlook.com',587);server.starttls();server.login(sender_email,sender_password)
-        server.sendmail(sender_email,receiver_email,msg.as_string());server.quit()
+        server = smtplib.SMTP('smtp-mail.outlook.com', 587)
+        server.starttls()
+
+        # Login to email account
+        print("Logging in to email account...")
+        server.login(sender_email, sender_password)
+        print(f"logged in successfully {sender_password}@{sender_email}")
+
+        # Send email
+        print("Sending email...")
+        print(f"Sending to -----> {receiver_email} from {sender_email}")
+        
+        server.sendmail(sender_email, receiver_email, msg.as_string())
+
+        # Quit SMTP server
+        print("Closing SMTP server connection...")
+        server.quit()
     except smtplib.SMTPAuthenticationError:
         print("Failed to login to SMTP server. Check email and password.")
-
-
+        
 
 sender_email = 'tradersbardataupdater@outlook.in'
 sender_password = 'TradersBarStockMarket'
@@ -128,6 +168,12 @@ else:
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     print("Sent message")
     print("sending email")
+    print(sender_email)
+    print(sender_password)
+    print(recipient_email)
+    print(body)
+    print(subject)
+    print(attachment_path)
     send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
     print("email sent")
 
