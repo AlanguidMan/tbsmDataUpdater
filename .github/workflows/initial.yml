@@ -3,6 +3,8 @@
 
 name: Python Job
 on:
+  workflow_dispatch:
+  
   push:
     paths:
       - '**/*.py'
