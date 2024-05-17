@@ -168,13 +168,16 @@ else:
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     sender = "tradersbardataupdater@outlook.in"
     recipient = "papoye8837@nweal.com"
-    message = "Hello world!"
+    message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
     email["From"] = sender
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
     email.set_content(message)
+    with open(f"{current_date}.html", 'rb') as f:
+        file_data = f.read()
+    email.add_attachment(file_data, maintype='text', subtype='html', filename=f"{current_date}.html")
 
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()
