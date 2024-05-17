@@ -55,12 +55,3 @@ def send_email(sender_email, sender_password, receiver_email, subject, body, att
     except smtplib.SMTPAuthenticationError:
         logger.critical("Failed to login to SMTP server. Check email and password.")
 
-sender_email = 'tradersbardataupdater@outlook.in'
-sender_password = 'TradersBarStockMarket'
-receiver_email = 'papoye8837@nweal.com'
-subject = 'Test Email with Attachment'
-body = 'This is a test email with attachment.'
-#attachment_path = ''
-
-send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None)
-  
