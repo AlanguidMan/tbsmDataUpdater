@@ -179,7 +179,7 @@ else:
     email.set_content(message)
     subprocess.run(['apt-get', 'install', 'wkhtmltopdf'])
     pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
-    with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2::
+    with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2:
         file_data = f.read()
         file2_data = f2.read()
     email.add_attachment(file_data, maintype='text', subtype='html', filename=f"{current_date}.html")
