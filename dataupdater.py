@@ -155,7 +155,7 @@ if current_date in holidays2024:
 else:
     with open(output_file_name, 'a') as file:
         start_time = time.time()
-        for symbol in list:  # Assuming list is defined somewhere in your code
+        for symbol in my_list:  # Assuming list is defined somewhere in your code
             print(f"running {symbol.upper()}")
             
             data = security_wise_archive(current_date, current_date, symbol)
