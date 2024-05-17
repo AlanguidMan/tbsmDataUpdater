@@ -15,6 +15,21 @@ import pdfkit
 #import subprocess
 import os
 
+TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
+
+#TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
+#ReceiverTelegramID = os.environ.get("ReceiverTelegramID")
+
+ReceiverTelegramID = '@crontabjob01'
+
+def SendTelegramFile(FileName):
+    Documentfile={'document':open(FileName,'rb')}
+    Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
+    print(Fileurl)
+    response = requests.request("POST",Fileurl,files=Documentfile)
+
+
+
 
 def format_as_crores(x):
     if isinstance(x, float):
@@ -62,3 +77,4 @@ my_list = [
 
 for i in my_list:
     security_wise_archive('17-05-2024', '17-05-2024', i)
+SendTelegramFile(f'{from_date}.csv')
