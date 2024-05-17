@@ -15,6 +15,11 @@ import pdfkit
 #import subprocess
 import os
 
+current_date = datetime.now().strftime("%d-%m-%Y")
+print(current_date)
+#current_date= '16-05-2024'
+output_file_name=f"{current_date}.html"
+
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -112,11 +117,6 @@ def SendTelegramFile(FileName):
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
     print(Fileurl)
     response = requests.request("POST",Fileurl,files=Documentfile)
-
-current_date = datetime.now().strftime("%d-%m-%Y")
-print(current_date)
-#current_date= '16-05-2024'
-output_file_name=f"{current_date}.html"
 
 
 if current_date in holidays2024:
