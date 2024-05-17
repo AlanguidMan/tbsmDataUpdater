@@ -21,7 +21,7 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     base_url = "https://www.nseindia.com/api/historical/securityArchives"
     url = f"{base_url}?from={from_date}&to={to_date}&symbol={symbol.upper()}&dataType=priceVolumeDeliverable&series={series.upper()}"
     #print("starting to fetch data ")
-    #print(url)
+    print(url)
     p=nsefetch(url)
     #print(type(p))
     #print("received data1")
@@ -94,7 +94,7 @@ def SendTelegramFile(FileName):
 
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
-current_date= '16-05-2024'
+#current_date= '16-05-2024'
 output_file_name=f"{current_date}.html"
 
 
