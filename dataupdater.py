@@ -137,7 +137,7 @@ else:
     smtp.starttls()
     smtp.login(sender, EMAIL_PASSWORD)
     print("logged in successfully")
-    print(f"sending mail to {recipient}")
+    SendMessageToTelegram(f"sending mail to {recipient}")
     #smtp.sendmail(sender, recipient, email.as_string())
     smtp.quit()
     SendTelegramFile(f"{current_date}.pdf")
