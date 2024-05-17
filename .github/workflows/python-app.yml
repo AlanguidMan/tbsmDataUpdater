@@ -18,9 +18,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas nsepython requests pdfkit
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: Install wkhtmltopdf
-        run: sudo apt-get install -y wkhtmltopdf
-    
+          
       - name: Run Python script
         run: python Csvgen.py 
