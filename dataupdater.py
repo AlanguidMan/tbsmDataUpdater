@@ -177,7 +177,7 @@ else:
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
     email.set_content(message)
-    subprocess.run(['apt-get', 'install', 'wkhtmltopdf'])
+    subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
     pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
     with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2:
         file_data = f.read()
