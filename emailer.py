@@ -1,57 +1,43 @@
+import os
 import smtplib
-import logging
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+from email.message import EmailMessage
+import requests as r 
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
-def send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None):
-    logger.info("Creating email message...")
-    # Create a multipart message
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
-    msg['Subject'] = subject
+def send_email(file_path):
+    msg = EmailMessage()
+    msg['Subject'] = "sending the first file"
+    msg['From'] = "tradersbardataupdater@outlook.in"
+    msg['To'] = "papoye8837@nweal.com"
 
-    # Add body to email
-    msg.attach(MIMEText(body, 'plain'))
+    with open(file_path, 'rb') as file:
+        file_data = file.read()
+        file_name = os.path.basename(file_path)
+    
+    msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
 
-    if attachment_path:
-        # Open the file to be sent
-        logger.info("Attaching file...")
-        filename = attachment_path
-        attachment = open(filename, "rb")
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(sender_email, password)
+        smtp.send_message(msg)
 
-        # Add attachment to message
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload((attachment).read())
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+# URL of the image to download from NASA
+image_url = "https://images-assets.nasa.gov/image/PIA03606/PIA03606~large.jpg?w=1024&h=1024&fit=crop&crop=faces%2Cfocalpoint"
 
-        # Attach the attachment to the email
-        msg.attach(part)
 
-    # Connect to SMTP server
-    logger.info("Connecting to SMTP server...")
-    try:
-        server = smtplib.SMTP('smtp-mail.outlook.com', 587)
-        server.starttls()
+# Send a GET request to the image URL
+response = requests.get(image_url)
 
-        # Login to email account
-        logger.info("Logging in to email account...")
-        server.login(sender_email, sender_password)
-
-        # Send email
-        logger.info("Sending email...")
-        server.sendmail(sender_email, receiver_email, msg.as_string())
-
-        # Quit SMTP server
-        logger.info("Closing SMTP server connection...")
-        server.quit()
-    except smtplib.SMTPAuthenticationError:
-        logger.critical("Failed to login to SMTP server. Check email and password.")
-
+# Check if the request was successful (status code 200)
+if response.status_code == 200:
+    # Open a file in binary write mode to save the image
+    with open("nasaimage.jpg", "wb") as f:
+        # Write the content of the response to the file
+        f.write(response.content)
+    print("Image downloaded and saved successfully.")
+    if "nasaimage.jpg" in os listdir():
+        send_email("nasaimage.jpg")
+    else:
+        print("can't find file")
+else:
+    print("Failed to download the image.")
+    
