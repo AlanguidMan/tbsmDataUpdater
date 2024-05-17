@@ -54,13 +54,13 @@ holidays2024 = {
 }
 
 
-html_content = """
+html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Email Template</title>
+<title>Delivery data for {current_date}</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -115,7 +115,7 @@ margin: 0 auto;
 <div class="container">
     <img src="https://cloudsconvert.com/dl.php?token=+ixZ6aLy08arfdsQfaMQ81e5KRg09ec9hhjPznNfVxo8WD5aHxwL5MJ1SWc8pK/CSl3o3o6H6+5QJjHqhT4Ynr8astT89NszeYNha/EtXC8lsdB+EkiQKQUxekoaYVBXRehnSb2FW08arq6ij88zcLaqNAMXo+f6UKWIbkXqr9rPYtHWxvMmGorEeEPqoY9m1K433RuhlH5qNG6isfzBpt4s2iW5xcj5ikYy/HD57cEuUVeQDQ==" alt="Logo" class="logo">
     <h1>Good Evening, sir.</h1>
-    <p>Please find the below file. It contains delivery positions for different ETFs.</p>
+    <p>Please find the below file. It contains delivery positions for different ETFs for {current_date}.</p>
     <p>After downloading the file, open it in Chrome. Thank you 😊 🙏.</p>
     <a href="#" class="cta-button">Download File</a>
 </div>
@@ -192,7 +192,7 @@ else:
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     #email = EmailMessage()
-    email= MIMEMultipart()
+    email= MIMEMultipart('related')
     email["From"] = sender
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
