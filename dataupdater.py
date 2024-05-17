@@ -17,7 +17,7 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     base_url = "https://www.nseindia.com/api/historical/securityArchives"
     url = f"{base_url}?from={from_date}&to={to_date}&symbol={symbol.upper()}&dataType=priceVolumeDeliverable&series={series.upper()}"
     #print("starting to fetch data ")
-    print(url)
+    #print(url)
     p=nsefetch(url)
     #print(type(p))
     #print("received data1")
@@ -79,12 +79,6 @@ def SendTelegramFile(FileName):
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
     response = requests.request("POST",Fileurl,files=Documentfile)
 
-
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
 def send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None):
     print("Creating email message...")
