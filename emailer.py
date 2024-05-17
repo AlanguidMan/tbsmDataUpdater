@@ -1,7 +1,7 @@
 import os
 import smtplib
 from email.message import EmailMessage
-import requests as r 
+import requests 
 
 
 def send_email(file_path):
