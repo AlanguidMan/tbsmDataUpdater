@@ -22,4 +22,6 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
       - name: Run Python script
-        run: python dataupdater.py # Replace 'your_script.py' with the name of your Python file
+        run: |
+          python emailer.py
+          python dataupdater.py # Replace 'your_script.py' with the name of your Python file
