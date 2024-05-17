@@ -16,8 +16,9 @@ def send_email(file_path):
     
     msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
 
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(sender_email, password)
+    with smtplib.SMTP_SSL('smtp-mail.outlook.com', port=587) as smtp:
+        smtp.starttls()
+        smtp.login("tradersbardataupdater@outlook.in", "TradersBarStockMarket")
         smtp.send_message(msg)
 
 # URL of the image to download from NASA
