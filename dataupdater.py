@@ -29,15 +29,7 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     #selected_data = json.dumps(selected_data.to_dict('records'))
     #return(selected_data)
 
-list = ["nv20ietf","Niftybees","bankbees",
-        "psubnkbees","bfsi","pvtbanietf",
-        "juniorbees","midcapetf","hdfcsml250",
-        "sensexietf","cpseetf","icicib22","mon100",
-        "mom30ietf","mafang","itbees","pharmabees","kotakalpha",
-        "consumbees","makeindia","infraietf","infrabees",
-        "autobees","goldbees","silverbees","ltgiltbees",
-        "Commoietf","healthy","tnidetf","masptop50",
-        "Lowvolietf","monifty500","kotakmid50"]
+
 
 holidays2024 = {
     "26-01-2024": "Republic Day",
@@ -56,6 +48,21 @@ holidays2024 = {
     "25-12-2024": "Christmas",
 }
 
+
+my_list = [
+    "Niftybees", "bankbees", "hdfcsensex",
+    "nv20ietf", "juniorbees", "monifty500",
+    "midcap", "midcapetf", "hdfcsml250",
+    "pvtbanietf", "psubnkbees", "bfsi",
+    "cpseetf", "icicib22", "autobees",
+    "itbees", "tnidetf", "pharmabees",
+    "healthy", "infraietf", "makeindia",
+    "consumbees", "Commoietf", "Lowvolietf",
+    "mom30ietf", "smallcap", "alpha",
+    "goldbees", "silverbees", "mon100",
+    "masptop50", "mafang", "morealty",
+    "ltgiltbees", "esg", "kotakmid50"
+]
 
 #TelegramBotCredential = '5747611163:AAFqIPOxRGTXP25py8mNdXRL7mz-TfsouO8'
 TelegramBotCredential = '6883565174:AAGXuW07FEidJ3o8sNNbDTQZ0OpS9WacHj4'
