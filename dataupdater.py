@@ -130,17 +130,16 @@ def send_email(sender_email, sender_password, receiver_email, subject, body, att
     except smtplib.SMTPAuthenticationError:
         print("Failed to login to SMTP server. Check email and password.")
         
-
+"""
 sender_email = 'tradersbardataupdater@outlook.in'
 sender_password = 'TradersBarStockMarket'
 receiver_email = 'papoye8837@nweal.com'
 body =None
+"""
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 current_date= '16-05-2024'
-subject= f"Delivery position for {current_date}"
 output_file_name=f"{current_date}.html"
-attachment_file = output_file_name
 
 
 
@@ -160,15 +159,20 @@ else:
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
-    print("Sent message")
-    print("sending email")
-    print(sender_email)
-    print(sender_password)
-    print(recipient_email)
-    print(body)
-    print(subject)
-    print(attachment_path)
-    send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
+    sender = "tradersbardataupdater@outlook.in"
+    recipient = "papoye8837@nweal.com"
+    message = "Hello world!"
+
+    email = EmailMessage()
+    email["From"] = sender
+    email["To"] = recipient
+    email["Subject"] = f"Delivery position for {current_date}"
+    email.set_content(message)
+
+    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+    smtp.starttls()
+    smtp.login(sender, "TradersBarStockMarket")
+    print("logged in successfully")
+    smtp.sendmail(sender, recipient, email.as_string())
+    smtp.quit()
     print("email sent")
-
-
