@@ -113,13 +113,13 @@ else:
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     # get secrets from environment variables
-    print(os.environ.get("EMAIL_SENDER"))
+    #print(os.environ.get("EMAIL_SENDER"))
     sender = os.environ.get("EMAIL_SENDER")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
     recipient1 = os.environ.get("EMAIL_RECIPIENT")
-    print(recipient1)
+    #print(recipient1)
     #sender = "tradersbardataupdater@outlook.in"
-    #recipient = "papoye8837@nweal.com"
+    recipient = "papoye8837@nweal.com"
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
