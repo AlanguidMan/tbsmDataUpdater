@@ -7,7 +7,10 @@ import requests
 import time
 from email.message import EmailMessage
 import smtplib
-from emailer import *
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -77,21 +80,36 @@ def SendTelegramFile(FileName):
     response = requests.request("POST",Fileurl,files=Documentfile)
 
 
+
+
+def send_email(sender_email, sender_password, receiver_email, subject, body= None, attachment_path=None):
+    msg = MIMEMultipart();msg['From']=sender_email;msg['To']=receiver_email;msg['Subject']=subject
+    msg.attach(MIMEText(body,'plain'))
+    if attachment_path:
+        filename=attachment_path;attachment=open(filename,"rb")
+        part=MIMEBase('application','octet-stream');part.set_payload((attachment).read());encoders.encode_base64(part)
+        part.add_header('Content-Disposition',"attachment; filename= %s"%filename);msg.attach(part)
+    try:
+        server=smtplib.SMTP('smtp-mail.outlook.com',587);server.starttls();server.login(sender_email,sender_password)
+        server.sendmail(sender_email,receiver_email,msg.as_string());server.quit()
+    except smtplib.SMTPAuthenticationError:
+        print("Failed to login to SMTP server. Check email and password.")
+
+
+
 sender_email = 'tradersbardataupdater@outlook.in'
 sender_password = 'TradersBarStockMarket'
 receiver_email = 'papoye8837@nweal.com'
-subject = 'Test Email with Attachment'
-body = 'This is a test email with attachment.'
-
-
-
-
+body =None
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 current_date= '16-05-2024'
+subject= f"Delivery position for {current_date}"
 output_file_name=f"{current_date}.html"
+attachment_file = output_file_name
 
 
+.
 if current_date in holidays2024:
     SendMessageToTelegram(f"Wishing you a happy {holidays2024[current_date]}!")
 else:
@@ -109,9 +127,6 @@ else:
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     print("Sent message")
-    attachment_file = f"{current_date}.html"
-    subject= f"Delivery data for {current_date}"
-    body = None
     print("sending email")
     send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
     print("email sent")
