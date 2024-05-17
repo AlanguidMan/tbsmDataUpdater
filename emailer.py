@@ -34,7 +34,7 @@ if response.status_code == 200:
         # Write the content of the response to the file
         f.write(response.content)
     print("Image downloaded and saved successfully.")
-    if "nasaimage.jpg" in os listdir():
+    if "nasaimage.jpg" in os.listdir():
         send_email("nasaimage.jpg")
     else:
         print("can't find file")
