@@ -79,6 +79,7 @@ ReceiverTelegramID = os.environ.get("ReceiverTelegramID")
 def SendMessageToTelegram(Message):
     try:
         Url = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendMessage?chat_id=" + str(ReceiverTelegramID)
+        print(Url)
         textdata ={ "text":Message}
         response = requests.request("POST",Url,params=textdata)
     except Exception as e:
@@ -88,6 +89,7 @@ def SendMessageToTelegram(Message):
 def SendTelegramFile(FileName):
     Documentfile={'document':open(FileName,'rb')}
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
+    print(Fileurl)
     response = requests.request("POST",Fileurl,files=Documentfile)
 
 current_date = datetime.now().strftime("%d-%m-%Y")
