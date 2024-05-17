@@ -68,8 +68,7 @@ my_list = [
     "ltgiltbees", "esg", "kotakmid50"
 ]
 
-#TelegramBotCredential = '5747611163:AAFqIPOxRGTXP25py8mNdXRL7mz-TfsouO8'
-#TelegramBotCredential = '6883565174:AAGXuW07FEidJ3o8sNNbDTQZ0OpS9WacHj4'
+
 #TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
 TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
@@ -112,13 +111,10 @@ else:
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
-    # get secrets from environment variables
-    #print(os.environ.get("EMAIL_SENDER"))
+    
     sender = os.environ.get("EMAIL_SENDER")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
     recipient1 = os.environ.get("EMAIL_RECIPIENT")
-    #print(recipient1)
-    #sender = "tradersbardataupdater@outlook.in"
     recipient = "papoye8837@nweal.com"
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
