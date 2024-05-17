@@ -3,7 +3,9 @@
 
 name: Python Job
 on:
-  push
+  push:
+    paths:
+      - '**/*.py'
 jobs:
   run_python:
     runs-on: ubuntu-latest
