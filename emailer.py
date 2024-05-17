@@ -65,7 +65,7 @@ attachment_path = 'path/to/your/attachment/file.txt'  # Set to None if no attach
 
 send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path)
 
-sender_email = 'tradersbardataupdater@outlook.in 
+sender_email = 'tradersbardataupdater@outlook.in'
 sender_password = 'TradersBarStockMarket'
 receiver_email = 'papoye8837@nweal.com'
 subject = 'Test Email with Attachment'
