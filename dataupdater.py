@@ -107,7 +107,9 @@ else:
             file.write(f"\n{data}\n\n")
         file.close()
     SendMessageToTelegram("Sending file...")
+    print("sending file to Telegram")
     SendTelegramFile(f"{current_date}.html")
+    print("successfully sent file")
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
@@ -115,7 +117,7 @@ else:
     sender = os.environ.get("EMAIL_SENDER")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
     recipient1 = os.environ.get("EMAIL_RECIPIENT")
-    recipient = "papoye8837@nweal.com"
+    recipient = "dotitebaj.jitavudon@rungel.net"
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
