@@ -61,55 +61,7 @@ html_content = f"""
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Delivery data for {current_date}</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f2f2f2;
-        color: #333333;
-    }
-.container {
-        max-width: 600px;
-        margin: auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center; /* Center align text */
-    }
-    h1 {
-        text-align: center;
-        color: #333333;
-    }
-    p {
-        margin-bottom: 20px;
-font-size: 18px;
-    }
-    .cta-button {
-        display: block;
-        width: 30%;
-        text-align: center;
-        background-color: #333333;
-        color: #ffffff;
-        text-decoration: none;
-margin: 0 auto;
-        padding: 8px 0; 
-        border-radius: 5px;
-    }
-    .logo {
-        display: block;
-        margin: auto;
-        width: 150px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-    }
-    @media only screen and (max-width: 600px) {
-        .container {
-            padding: 10px;
-        }
-    }
-</style>
+<style > body{font-family:Arial, sans-serif;margin:0;padding:0;background-color:#f2f2f2;color:#333333}.container{max-width:600px;margin:auto;padding:20px;background-color:#ffffff;border-radius:10px;overflow:hidden;text-align:center}h1{text-align:center;color:#333333}p{margin-bottom:20px;font-size:18px}.cta-button{display:block;width:30%;text-align:center;background-color:#333333;color:#ffffff;text-decoration:none;margin:0 auto;padding:8px 0;border-radius:5px}.logo{display:block;margin:auto;width:150px;border-radius:50%;margin-bottom:20px}@media only screen and (max-width: 600px){.container{padding:10px}}</style>
 </head>
 <body>
 <div class="container">
