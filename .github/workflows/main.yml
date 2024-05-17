@@ -6,6 +6,8 @@ name: tbsm delivery emailer
 on:
   schedule:
     - cron: '40 12 * * *'
+  workflow_dispatch:
+  
 jobs:
   run_python:
     runs-on: ubuntu-latest
@@ -27,4 +29,10 @@ jobs:
         run: sudo apt-get install -y wkhtmltopdf
     
       - name: Run Python script
+        env: 
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT2 }}
+          RECEIVERTELEGRAMID: ${{ secrets.RECEIVERTELEGRAMID }}
+          TELEGRAMBOTCREDENTIAL2: ${{ secrets.TELEGRAMBOTCREDENTIAL2 }}
         run: python dataupdater.py 
