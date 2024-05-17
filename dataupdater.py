@@ -7,6 +7,8 @@ import requests
 import time
 from email.message import EmailMessage
 import smtplib
+from emailer import *
+
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     base_url = "https://www.nseindia.com/api/historical/securityArchives"
@@ -75,6 +77,15 @@ def SendTelegramFile(FileName):
     response = requests.request("POST",Fileurl,files=Documentfile)
 
 
+sender_email = 'tradersbardataupdater@outlook.in'
+sender_password = 'TradersBarStockMarket'
+receiver_email = 'papoye8837@nweal.com'
+subject = 'Test Email with Attachment'
+body = 'This is a test email with attachment.'
+
+
+
+
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 current_date= '16-05-2024'
@@ -94,6 +105,8 @@ else:
         file.close()
     SendMessageToTelegram("Sending file...")
     SendTelegramFile(f"{current_date}.html")
+    attachment_file = f"{current_date}.html"
+    send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
     end_time = time.time()
     execution_time = end_time - start_time
     sendEmail()
