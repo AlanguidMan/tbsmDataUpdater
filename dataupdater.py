@@ -12,7 +12,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import pdfkit 
-import subprocess
+#import subprocess
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -88,68 +88,10 @@ def SendTelegramFile(FileName):
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
     response = requests.request("POST",Fileurl,files=Documentfile)
 
-
-def send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None):
-    print("Creating email message...")
-    # Create a multipart message
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
-    msg['Subject'] = subject
-
-    # Add body to email
-    msg.attach(MIMEText(body, 'plain'))
-
-    if attachment_path:
-        # Open the file to be sent
-        print(f"Received {attachment_path} as attachment")
-        print("Attaching file...")
-        filename = attachment_path
-        attachment = open(filename, "rb")
-
-        # Add attachment to message
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload((attachment).read())
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
-        # Attach the attachment to the email
-        msg.attach(part)
-
-    # Connect to SMTP server
-    print("Connecting to SMTP server...")
-    try:
-        server = smtplib.SMTP('smtp-mail.outlook.com', 587)
-        server.starttls()
-
-        # Login to email account
-        print("Logging in to email account...")
-        server.login(sender_email, sender_password)
-        print(f"logged in successfully {sender_password}@{sender_email}")
-
-        # Send email
-        print("Sending email...")
-        print(f"Sending to -----> {receiver_email} from {sender_email}")
-        
-        server.sendmail(sender_email, receiver_email, msg.as_string())
-
-        # Quit SMTP server
-        print("Closing SMTP server connection...")
-        server.quit()
-    except smtplib.SMTPAuthenticationError:
-        print("Failed to login to SMTP server. Check email and password.")
-        
-"""
-sender_email = 'tradersbardataupdater@outlook.in'
-sender_password = 'TradersBarStockMarket'
-receiver_email = 'papoye8837@nweal.com'
-body =None
-"""
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 current_date= '16-05-2024'
 output_file_name=f"{current_date}.html"
-
 
 
 if current_date in holidays2024:
@@ -159,7 +101,6 @@ else:
         start_time = time.time()
         for symbol in my_list:  # Assuming list is defined somewhere in your code
             print(f"running {symbol.upper()}")
-            
             data = security_wise_archive(current_date, current_date, symbol)
             file.write(f"\n{data}\n\n")
         file.close()
@@ -177,18 +118,18 @@ else:
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
     email.set_content(message)
-    subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
+    #subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
     pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
     with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2:
         file_data = f.read()
         file2_data = f2.read()
     email.add_attachment(file_data, maintype='text', subtype='html', filename=f"{current_date}.html")
     email.add_attachment(file2_data, maintype='application', subtype='pdf', filename=f'{current_date}.pdf')
-
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()
     smtp.login(sender, "TradersBarStockMarket")
     print("logged in successfully")
     smtp.sendmail(sender, recipient, email.as_string())
     smtp.quit()
+    SendTelegramFile(f"{current_date}.pdf")
     print("email sent")
