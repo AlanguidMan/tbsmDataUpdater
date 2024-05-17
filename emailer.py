@@ -62,5 +62,5 @@ subject = 'Test Email with Attachment'
 body = 'This is a test email with attachment.'
 #attachment_path = ''
 
-send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path)
+send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=None)
   
