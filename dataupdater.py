@@ -59,25 +59,7 @@ holidays2024 = {
 }
 
 
-html_content = f"""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delivery data for {current_date}</title>
-</head>
-<body>
-<div class="container">
-    <img src="https://cloudsconvert.com/dl.php?token=+ixZ6aLy08arfdsQfaMQ81e5KRg09ec9hhjPznNfVxo8WD5aHxwL5MJ1SWc8pK/CSl3o3o6H6+5QJjHqhT4Ynr8astT89NszeYNha/EtXC8lsdB+EkiQKQUxekoaYVBXRehnSb2FW08arq6ij88zcLaqNAMXo+f6UKWIbkXqr9rPYtHWxvMmGorEeEPqoY9m1K433RuhlH5qNG6isfzBpt4s2iW5xcj5ikYy/HD57cEuUVeQDQ==" alt="Logo" class="logo">
-    <h1>Good Evening, sir.</h1>
-    <p>Please find the below file. It contains delivery positions for different ETFs for {current_date}.</p>
-    <p>After downloading the file, open it in Chrome. Thank you 😊 🙏.</p>
-    <a href="#" class="cta-button">Download File</a>
-</div>
-</body>
-</html>
-"""
+
 
 my_list = [
     "Niftybees", "bankbees", "hdfcsensex",
@@ -142,13 +124,13 @@ else:
     recipient = os.environ.get("EMAIL_RECIPIENT")
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
-    #email = EmailMessage()
-    email= MIMEMultipart('related')
+    email = EmailMessage()
+    #email= MIMEMultipart('related')
     email["From"] = sender
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
-    #email.set_content(message)
-    email.attach(MIMEText(html_content, 'html'))
+    email.set_content(message)
+    #email.attach(MIMEText(html_content, 'html'))
     #subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
     pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
     with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2:
