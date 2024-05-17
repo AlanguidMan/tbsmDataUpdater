@@ -109,7 +109,7 @@ output_file_name=f"{current_date}.html"
 attachment_file = output_file_name
 
 
-.
+
 if current_date in holidays2024:
     SendMessageToTelegram(f"Wishing you a happy {holidays2024[current_date]}!")
 else:
