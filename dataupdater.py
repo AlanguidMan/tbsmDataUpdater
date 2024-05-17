@@ -77,6 +77,7 @@ def SendTelegramFile(FileName):
 
 current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
+current_date= '16-05-2024'
 output_file_name=f"{current_date}.html"
 
 
@@ -87,7 +88,7 @@ else:
         start_time = time.time()
         for symbol in list:  # Assuming list is defined somewhere in your code
             print(f"running {symbol.upper()}")
-            current_date= '16-05-2024'
+            
             data = security_wise_archive(current_date, current_date, symbol)
             file.write(f"\n{data}\n\n")
         file.close()
