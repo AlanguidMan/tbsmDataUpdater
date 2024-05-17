@@ -69,12 +69,12 @@ my_list = [
 ]
 
 
-#TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
+TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
-TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
-ReceiverTelegramID = os.environ.get("ReceiverTelegramID")
+#TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
+#ReceiverTelegramID = os.environ.get("ReceiverTelegramID")
 
-#ReceiverTelegramID = '@crontabjob01'
+ReceiverTelegramID = '@crontabjob01'
 
 def SendMessageToTelegram(Message):
     try:
