@@ -13,6 +13,8 @@ from email.mime.base import MIMEBase
 from email import encoders
 import pdfkit 
 #import subprocess
+import os
+
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -67,12 +69,13 @@ my_list = [
 ]
 
 #TelegramBotCredential = '5747611163:AAFqIPOxRGTXP25py8mNdXRL7mz-TfsouO8'
-TelegramBotCredential = '6883565174:AAGXuW07FEidJ3o8sNNbDTQZ0OpS9WacHj4'
-TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
+#TelegramBotCredential = '6883565174:AAGXuW07FEidJ3o8sNNbDTQZ0OpS9WacHj4'
+#TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
-#my personal id
-ReceiverTelegramID = '@crontabjob01'
-ReceiverTelegramID2 = '@tbsmdeldata_bot'
+TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
+ReceiverTelegramID2 = os.environ.get("ReceiverTelegramID2")
+
+#ReceiverTelegramID = '@crontabjob01'
 
 def SendMessageToTelegram(Message):
     try:
@@ -109,8 +112,13 @@ else:
     end_time = time.time()
     execution_time = end_time - start_time
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
-    sender = "tradersbardataupdater@outlook.in"
-    recipient = "papoye8837@nweal.com"
+    # get secrets from environment variables
+    print(os.environ.get("EMAIL_SENDER"))
+    sender = os.environ.get("EMAIL_SENDER")
+    EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+    recipient = os.environ.get("EMAIL_RECIPIENT")
+    #sender = "tradersbardataupdater@outlook.in"
+    #recipient = "papoye8837@nweal.com"
     message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
     email = EmailMessage()
@@ -127,7 +135,7 @@ else:
     email.add_attachment(file2_data, maintype='application', subtype='pdf', filename=f'{current_date}.pdf')
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()
-    smtp.login(sender, "TradersBarStockMarket")
+    smtp.login(sender, EMAIL_PASSWORD)
     print("logged in successfully")
     smtp.sendmail(sender, recipient, email.as_string())
     smtp.quit()
