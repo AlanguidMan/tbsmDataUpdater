@@ -12,10 +12,10 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     base_url = "https://www.nseindia.com/api/historical/securityArchives"
     url = f"{base_url}?from={from_date}&to={to_date}&symbol={symbol.upper()}&dataType=priceVolumeDeliverable&series={series.upper()}"
     #print("starting to fetch data ")
-    #print(url)
+    print(url)
     p=nsefetch(url)
-    print(type(p))
-    print("received data1")
+    #print(type(p))
+    #print("received data1")
     df=pd.DataFrame(p['data'])
     selected_columns = ['mTIMESTAMP','CH_SYMBOL','CH_TOT_TRADED_QTY','CH_TOT_TRADED_VAL','COP_DELIV_QTY','COP_DELIV_PERC']
     selected_data = df.loc[:, selected_columns].to_html()
@@ -69,22 +69,6 @@ def SendMessageToTelegram(Message):
         Message = str(e) + ": Exception occur in SendMessageToTelegram"
         print(Message)
 
-
-def sendEmail():
-    sender = 'tradersbardataupdater@outlook.in'
-    recipient = "papoye8837@nweal.com"
-    message = "Hello world!"
-    email = EmailMessage()
-    email["From"] = sender
-    email["To"] = recipient
-    email["Subject"] = "Test Email"
-    email.set_content(message)
-    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
-    smtp.starttls()
-    smtp.login(sender, "TradersbarStockMarket")
-    smtp.sendmail(sender, recipient, email.as_string())
-    smtp.quit()
-
 def SendTelegramFile(FileName):
     Documentfile={'document':open(FileName,'rb')}
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
@@ -106,6 +90,7 @@ else:
             current_date= '16-05-2024'
             data = security_wise_archive(current_date, current_date, symbol)
             file.write(f"\n{data}\n\n")
+        file.close()
     SendMessageToTelegram("Sending file...")
     SendTelegramFile(f"{current_date}.html")
     end_time = time.time()
