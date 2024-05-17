@@ -11,6 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import pdfkit 
+import subprocess
 
 
 def security_wise_archive(from_date, to_date, symbol, series="ALL"):
@@ -175,9 +177,13 @@ else:
     email["To"] = recipient
     email["Subject"] = f"Delivery position for {current_date}"
     email.set_content(message)
-    with open(f"{current_date}.html", 'rb') as f:
+    subprocess.run(['apt-get', 'install', 'wkhtmltopdf'])
+    pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
+    with open(f"{current_date}.html", 'rb') as f, open(f'{current_date}.pdf', 'rb') as f2::
         file_data = f.read()
+        file2_data = f2.read()
     email.add_attachment(file_data, maintype='text', subtype='html', filename=f"{current_date}.html")
+    email.add_attachment(file2_data, maintype='application', subtype='pdf', filename=f'{current_date}.pdf')
 
     smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
     smtp.starttls()
