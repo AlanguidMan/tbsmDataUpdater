@@ -105,12 +105,15 @@ else:
         file.close()
     SendMessageToTelegram("Sending file...")
     SendTelegramFile(f"{current_date}.html")
-    attachment_file = f"{current_date}.html"
-    send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
     end_time = time.time()
     execution_time = end_time - start_time
-    sendEmail()
     SendMessageToTelegram(f"The code took {execution_time} seconds to complete.")
     print("Sent message")
+    attachment_file = f"{current_date}.html"
+    subject= f"Delivery data for {current_date}"
+    body = None
+    print("sending email")
+    send_email(sender_email, sender_password, receiver_email, subject, body, attachment_path=attachment_file)
+    print("email sent")
 
 
