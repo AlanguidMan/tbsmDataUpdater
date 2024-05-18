@@ -143,7 +143,7 @@ print("logged in successfully")
 SendMessageToTelegram(f"sending mail to {recipient}")
 smtp.sendmail(sender, recipient, email.as_string())
 smtp.quit()
-SendTelegramFile('destination.pdf")
+SendTelegramFile("destination.pdf")
 print("email sent")
 
 """
