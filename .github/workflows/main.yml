@@ -35,4 +35,4 @@ jobs:
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT2 }}
           RECEIVERTELEGRAMID: ${{ secrets.RECEIVERTELEGRAMID }}
           TELEGRAMBOTCREDENTIAL2: ${{ secrets.TELEGRAMBOTCREDENTIAL2 }}
-        run: python dataupdater.py 
+        run: python dataupdater_stable.py
