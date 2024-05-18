@@ -7,7 +7,7 @@ on:
   
   push:
     paths:
-      - '**/*.py'
+      - '**/dataupdater.py'
 jobs:
   run_python:
     runs-on: ubuntu-latest
