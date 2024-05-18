@@ -34,7 +34,7 @@ holidays2024 = {
     "25-12-2024": "Christmas",
 }
 
-current_date = datetime.now().strftime("%d-%m-%Y")
+current_date = datetime.datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 
 
