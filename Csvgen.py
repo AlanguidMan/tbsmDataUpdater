@@ -44,6 +44,16 @@ TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
 ReceiverTelegramID = '@crontabjob01'
 
+def SendMessageToTelegram(Message):
+    try:
+        Url = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendMessage?chat_id=" + str(ReceiverTelegramID)
+        print(Url)
+        textdata ={ "text":Message}
+        response = requests.request("POST",Url,params=textdata)
+    except Exception as e:
+        Message = str(e) + ": Exception occur in SendMessageToTelegram"
+        print(Message)
+
 def SendTelegramFile(FileName):
     Documentfile={'document':open(FileName,'rb')}
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
