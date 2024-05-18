@@ -116,7 +116,6 @@ for counter,i in enumerate(my_list):
     subject = f"Delivery position for {current_date} "
     password = "TradersBarStockMarket"
     recipient_email = "vamiy71000@mcatag.com"
-
     msg = MIMEMultipart()
     msg["From"] = sender_email
     msg["To"] = recipient_email
@@ -124,21 +123,11 @@ for counter,i in enumerate(my_list):
     msg.preamble = subject
     csvfile= f'{current_date}.csv'
     pdffile= f'{current_date}.pdf'
-
-"""
-    fp = open(fileToSend)
-    # Note: we should handle calculating the charset
-    attachment = MIMEText(fp.read(), _subtype=subtype)
-    fp.close()
-    attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
-    msg.attach(attachment)
-"""
     f= open(csvfile)
     attachment = MIMEText(f.read(), _subtype="csv")
     f.close
     attachment.add_header("Content-Disposition", "attachment", filename=f"{csvfile}")
     msg.attach(attachment)
-
     with open(pdffile, 'rb') as f:
         attachment = MIMEApplication(f.read(), _subtype="pdf")
         attachment.add_header('Content-Disposition','attachment',filename=f"{pdffile}")
