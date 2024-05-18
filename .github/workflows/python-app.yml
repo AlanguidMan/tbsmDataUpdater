@@ -19,5 +19,11 @@ jobs:
           pip install pandas nsepython requests pdfkit
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
-      - name: Run Python script
+      - name: Run Csvgen
+        env: 
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+          RECEIVERTELEGRAMID: ${{ secrets.RECEIVERTELEGRAMID }}
+          TELEGRAMBOTCREDENTIAL2: ${{ secrets.TELEGRAMBOTCREDENTIAL2 }}
         run: python Csvgen.py 
