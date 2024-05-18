@@ -53,7 +53,7 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
     headers = ['Date', 'Symbol', 'Total Traded Qty', 'Total Traded Value', 'Total Delivery Quantity', 'Delivery Percentage']
     new_df.columns = headers
 
-    selected_data = new_df.to_csv(f'{from_date}.csv', index=False, header=headers)
+    selected_data = new_df.to_csv(f'{from_date}.csv', mode='a', index=False, header=headers)
 
     print("printing selected data")
     print(selected_data)
