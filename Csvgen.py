@@ -99,6 +99,8 @@ my_list = [
 
 for i in my_list:
     security_wise_archive('17-05-2024', '17-05-2024', i)
+
+SendTelegramFile('17-05-2024.csv')
 sender = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 recipient = os.environ.get("EMAIL_RECIPIENT")
@@ -124,4 +126,4 @@ SendMessageToTelegram(f"sending mail to {recipient}")
 smtp.sendmail(sender, recipient, email.as_string())
 smtp.quit()
 print("email sent")
-SendTelegramFile('17-05-2024.csv')
+
