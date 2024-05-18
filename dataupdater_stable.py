@@ -37,7 +37,7 @@ holidays2024 = {
 current_date = datetime.datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 
-
+subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
 TelegramBotCredential2 = '6794059157:AAHHpVzTEl-oVNewNbLHJUoe6elTwqm7n5U'
 
 #TelegramBotCredential2 = os.environ.get("TelegramBotCredential2")
@@ -107,34 +107,36 @@ for counter,i in enumerate(my_list):
     else:
        security_wise_archive(current_date, current_date,i,drop=True)
 
-    df = pd.read_csv(f'{current_date}.csv')
-    html_table = df.to_html()
-    subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
-    pdfkit.from_string(html_table, f'{current_date}.pdf')
-    sender_email = "tradersbardataupdater@outlook.in"
-    recipient_email = "dotitebaj.jitavudon@rungel.net"
-    subject = f"Delivery position for {current_date} "
-    password = "TradersBarStockMarket"
-    recipient_email = "vamiy71000@mcatag.com"
-    msg = MIMEMultipart()
-    msg["From"] = sender_email
-    msg["To"] = recipient_email
-    msg["Subject"] = subject 
-    msg.preamble = subject
-    csvfile= f'{current_date}.csv'
-    pdffile= f'{current_date}.pdf'
-    f= open(csvfile)
-    attachment = MIMEText(f.read(), _subtype="csv")
-    f.close
-    attachment.add_header("Content-Disposition", "attachment", filename=f"{csvfile}")
+   
+df = pd.read_csv(f'{current_date}.csv')
+html_table = df.to_html()
+pdfkit.from_string(html_table, f'{current_date}.pdf')
+sender_email = "tradersbardataupdater@outlook.in"
+recipient_email = "dotitebaj.jitavudon@rungel.net"
+subject = f"Delivery position for {current_date} "
+password = "TradersBarStockMarket"
+recipient_email = "vamiy71000@mcatag.com"
+msg = MIMEMultipart()
+msg["From"] = sender_email
+msg["To"] = recipient_email
+msg["Subject"] = subject 
+msg.preamble = subject
+csvfile= f'{current_date}.csv'
+pdffile= f'{current_date}.pdf'
+f= open(csvfile)
+attachment = MIMEText(f.read(), _subtype="csv")
+f.close
+attachment.add_header("Content-Disposition", "attachment", filename=f"{csvfile}")
+msg.attach(attachment)
+with open(pdffile, 'rb') as f:
+    attachment = MIMEApplication(f.read(), _subtype="pdf")
+    attachment.add_header('Content-Disposition','attachment',filename=f"{pdffile}")
     msg.attach(attachment)
-    with open(pdffile, 'rb') as f:
-        attachment = MIMEApplication(f.read(), _subtype="pdf")
-        attachment.add_header('Content-Disposition','attachment',filename=f"{pdffile}")
-        msg.attach(attachment)
-    server = smtplib.SMTP("smtp-mail.outlook.com", 587)
-    server.starttls()
-    server.login(sender_email, password)
-    print(f"logged in {password}@{sender_email}")
-    server.sendmail(sender_email, recipient_email, msg.as_string())
-    server.quit()
+server = smtplib.SMTP("smtp-mail.outlook.com", 587)
+server.starttls()
+server.login(sender_email, password)
+print(f"logged in {password}@{sender_email}")
+server.sendmail(sender_email, recipient_email, msg.as_string())
+server.quit()
+SendTelegramFile(f"{csvfile}")
+SendTelegramFile(f"{pdffile}")
