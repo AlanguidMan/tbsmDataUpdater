@@ -135,16 +135,16 @@ email.set_content(message)
 
 with open('destination.pdf', 'rb') as f2:
         file2_data = f2.read()
-    email.add_attachment(file2_data, maintype='application', subtype='pdf', filename='destination.pdf')
-    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
-    smtp.starttls()
-    smtp.login(sender, EMAIL_PASSWORD)
-    print("logged in successfully")
-    SendMessageToTelegram(f"sending mail to {recipient}")
-    smtp.sendmail(sender, recipient, email.as_string())
-    smtp.quit()
-    SendTelegramFile('destination.pdf")
-    print("email sent")
+email.add_attachment(file2_data, maintype='application', subtype='pdf', filename='destination.pdf')
+smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+smtp.starttls()
+smtp.login(sender, EMAIL_PASSWORD)
+print("logged in successfully")
+SendMessageToTelegram(f"sending mail to {recipient}")
+smtp.sendmail(sender, recipient, email.as_string())
+smtp.quit()
+SendTelegramFile('destination.pdf")
+print("email sent")
 
 """
 filename = f"{current_date}.csv"
