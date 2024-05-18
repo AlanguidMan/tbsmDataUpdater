@@ -8,11 +8,12 @@ import time
 from email.message import EmailMessage
 import smtplib
 from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import pdfkit 
-#import subprocess
+import subprocess
 import os
 
 
@@ -111,6 +112,16 @@ for i in my_list:
     security_wise_archive('17-05-2024', '17-05-2024', i)
 
 SendTelegramFile('17-05-2024.csv')
+
+import pandas as pd
+import pdfkit
+
+df = pd.read_csv('17-05-2024.csv')
+html_table = df.to_html()
+subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
+pdfkit.from_string(html_table, 'destination.pdf')
+
+
 sender = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 recipient = os.environ.get("EMAIL_RECIPIENT")
@@ -121,9 +132,25 @@ email["From"] = sender
 email["To"] = recipient
 email["Subject"] = f"Delivery position for {current_date}"
 email.set_content(message)
+
+with open('destination.pdf', 'rb') as f2:
+        file2_data = f2.read()
+    email.add_attachment(file2_data, maintype='application', subtype='pdf', filename='destination.pdf')
+    smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+    smtp.starttls()
+    smtp.login(sender, EMAIL_PASSWORD)
+    print("logged in successfully")
+    SendMessageToTelegram(f"sending mail to {recipient}")
+    smtp.sendmail(sender, recipient, email.as_string())
+    smtp.quit()
+    SendTelegramFile('destination.pdf")
+    print("email sent")
+
+"""
+filename = f"{current_date}.csv"
 with open(f"{current_date}.csv", 'rb') as f:
-    file_data = f.read()
-email.add_attachment(file_data, maintype='text', subtype='csv', filename=f"{current_date}.csv")
+    email.attach(MIMEApplication(f.read(), Name=filename))
+#email.add_attachment(file_data, maintype='text', subtype='csv', filename=f"{current_date}.csv")
 smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
 smtp.starttls()
 smtp.login(sender, EMAIL_PASSWORD)
@@ -132,4 +159,4 @@ SendMessageToTelegram(f"sending mail to {recipient}")
 smtp.sendmail(sender, recipient, email.as_string())
 smtp.quit()
 print("email sent")
-
+"""
