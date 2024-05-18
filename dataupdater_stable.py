@@ -1,5 +1,3 @@
-pip install nsepython pdfkit
-
 
 import pandas as pd
 import mimetypes
@@ -36,7 +34,7 @@ holidays2024 = {
     "25-12-2024": "Christmas",
 }
 
-current_date = datetime.datetime.now().strftime("%d-%m-%Y")
+current_date = datetime.now().strftime("%d-%m-%Y")
 print(current_date)
 
 
@@ -62,9 +60,6 @@ def SendTelegramFile(FileName):
     Fileurl = "https://api.telegram.org/bot" + str(TelegramBotCredential2) +  "/sendDocument?chat_id=" + str(ReceiverTelegramID)
     print(Fileurl)
     response = requests.request("POST",Fileurl,files=Documentfile)
-
-
-
 
 def format_as_crores(x):
     if isinstance(x, float):
@@ -112,96 +107,45 @@ for counter,i in enumerate(my_list):
     else:
        security_wise_archive(current_date, current_date,i,drop=True)
 
-df = pd.read_csv(f'{current_date}.csv')
-html_table = df.to_html()
-subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
-pdfkit.from_string(html_table, f'{current_date}.pdf')
+    df = pd.read_csv(f'{current_date}.csv')
+    html_table = df.to_html()
+    subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
+    pdfkit.from_string(html_table, f'{current_date}.pdf')
+    sender_email = "tradersbardataupdater@outlook.in"
+    recipient_email = "dotitebaj.jitavudon@rungel.net"
+    subject = f"Delivery position for {current_date} "
+    password = "TradersBarStockMarket"
+    recipient_email = "vamiy71000@mcatag.com"
 
-sender_email = "tradersbardataupdater@outlook.in"
-recipient_email = "dotitebaj.jitavudon@rungel.net"
-subject = f"Delivery position for {current_date} "
-password = "TradersBarStockMarket"
-
-recipient_email = "vamiy71000@mcatag.com"
-
-msg = MIMEMultipart()
-msg["From"] = sender_email
-msg["To"] = recipient_email
-msg["Subject"] = "test"
-msg.preamble = subject
-
-csvfile= f'{current_date}.csv'
-pdffile= f'{current_date}.pdf'
+    msg = MIMEMultipart()
+    msg["From"] = sender_email
+    msg["To"] = recipient_email
+    msg["Subject"] = subject 
+    msg.preamble = subject
+    csvfile= f'{current_date}.csv'
+    pdffile= f'{current_date}.pdf'
 
 """
-fp = open(fileToSend)
+    fp = open(fileToSend)
     # Note: we should handle calculating the charset
     attachment = MIMEText(fp.read(), _subtype=subtype)
     fp.close()
-attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
-msg.attach(attachment)
+    attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+    msg.attach(attachment)
 """
-f= open(csvfile)
-attachment = MIMEText(f.read(), _subtype="csv")
-f.close
-attachment.add_header("Content-Disposition", "attachment", filename=f"{csvfile}")
-msg.attach(attachment)
-
-with open(pdffile, 'rb') as f:
-    attachment = MIMEApplication(f.read(), _subtype="pdf")
-    attachment.add_header('Content-Disposition','attachment',filename=f"{pdffile}")
+    f= open(csvfile)
+    attachment = MIMEText(f.read(), _subtype="csv")
+    f.close
+    attachment.add_header("Content-Disposition", "attachment", filename=f"{csvfile}")
     msg.attach(attachment)
 
-
-server = smtplib.SMTP("smtp-mail.outlook.com", 587)
-server.starttls()
-server.login(sender_email, password)
-print(f"logged in {password}@{sender_email}")
-server.sendmail(sender_email, recipient_email, msg.as_string())
-server.quit()
-
-ctype, encoding = mimetypes.guess_type(f"{current_date}.pdf")
-
-print(ctype)
-print(encoding)
-
-
-
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
-
-# create a secure connection to the Outlook SMTP server
-sender_email = "tradersbardataupdater@outlook.in"
-recipient_email = "dotitebaj.jitavudon@rungel.net"
-subject = f"Delivery position for {current_date}"
-password = "TradersBarStockMarket"
-#filename = f"{current_date}"
-
-
-
-recipient_email = "vamiy71000@mcatag.com"
-
-msg = MIMEMultipart()
-msg["From"] = sender_email
-msg["To"] = recipient_email
-msg["Subject"] = subject
-msg.preamble = subject
-
-# attach the PDF file
-
-server = smtplib.SMTP('smtp-mail.outlook.com', 587)
-server.starttls()
-server.login(sender_email, password)
-
-# send the message
-server.send_message(msg)
-
-# close the connection
-server.quit()
-
-!jupyter nbconvert --to script Untitled1.ipynb
-
-from google.colab import drive
-drive.mount('/content/drive')
+    with open(pdffile, 'rb') as f:
+        attachment = MIMEApplication(f.read(), _subtype="pdf")
+        attachment.add_header('Content-Disposition','attachment',filename=f"{pdffile}")
+        msg.attach(attachment)
+    server = smtplib.SMTP("smtp-mail.outlook.com", 587)
+    server.starttls()
+    server.login(sender_email, password)
+    print(f"logged in {password}@{sender_email}")
+    server.sendmail(sender_email, recipient_email, msg.as_string())
+    server.quit()
