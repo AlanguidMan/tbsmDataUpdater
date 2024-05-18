@@ -117,14 +117,10 @@ recipient = os.environ.get("EMAIL_RECIPIENT")
 message = "Good Evening, sir. please find the below file. It contains delivery positions for different ETFs. After downloading the file, open it in Chrome. Thank you 😊 🙏 "
 
 email = EmailMessage()
-#email= MIMEMultipart('related')
 email["From"] = sender
 email["To"] = recipient
 email["Subject"] = f"Delivery position for {current_date}"
 email.set_content(message)
-#email.attach(MIMEText(html_content, 'html'))
-    #subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
-    #pdfkit.from_file(f"{current_date}.html", f'{current_date}.pdf')
 with open(f"{current_date}.csv", 'rb') as f:
     file_data = f.read()
 email.add_attachment(file_data, maintype='text', subtype='csv', filename=f"{current_date}.csv")
