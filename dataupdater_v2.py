@@ -35,6 +35,10 @@ holidays2024 = {
     "25-12-2024": "Christmas",
 }
 
+# get emails and password from environment variables
+EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+
 #current_date = datetime.datetime.now().strftime("%d-%m-%Y")
 current_date = "24-04-2024"
 print(current_date)
@@ -77,14 +81,13 @@ def format_as_crores(x):
 
 def mailSend():
     start_time = time.time()
-    sender_email = "tradersbardataupdater@outlook.in"
-    recipient_email = "dotitebaj.jitavudon@rungel.net"
-    subject = f"Delivery position for {current_date} "
-    password = "TradersBarStockMarket"
+    sender_email = EMAIL_SENDER
     recipient_email = "vamiy71000@mcatag.com"
+    subject = f"Delivery position for {current_date} "
+    password = EMAIL_PASSWORD
     msg = MIMEMultipart()
     msg["From"] = sender_email
-    msg["To"] = recipient_email
+    msg["To"] = recipient_email1
     msg["Subject"] = subject
     msg.preamble = subject
     f= open(csvfile)
