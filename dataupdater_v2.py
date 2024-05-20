@@ -40,7 +40,7 @@ EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
 #current_date = datetime.datetime.now().strftime("%d-%m-%Y")
-current_date = "24-04-2024"
+current_date = "18-01-2024"
 print(current_date)
 csvfile= f'{current_date}.csv'
 pdffile= f'{current_date}.pdf'
