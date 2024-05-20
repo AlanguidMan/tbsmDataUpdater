@@ -4,12 +4,11 @@
 name: tbsm delivery emailer
 
 on:
-  schedule:
-    - cron: '40 12 * * 1-5'
+  
   workflow_dispatch:
   push:
     paths:
-      - '**/dataupdater_stable.py'
+      - '**/dataupdater_v2.py'
   
 jobs:
   run_python:
@@ -38,4 +37,4 @@ jobs:
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT2 }}
           RECEIVERTELEGRAMID: ${{ secrets.RECEIVERTELEGRAMID }}
           TELEGRAMBOTCREDENTIAL2: ${{ secrets.TELEGRAMBOTCREDENTIAL2 }}
-        run: python dataupdater_stable.py
+        run: python dataupdater_v2.py
