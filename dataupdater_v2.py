@@ -1,3 +1,5 @@
+print("starting DataUpdater V2.o...")
+
 import pandas as pd
 import mimetypes
 from datetime import datetime
@@ -109,9 +111,6 @@ def security_wise_archive(from_date, to_date, symbol, drop, series="ALL"):
         new_df.to_csv(f'{from_date}.csv', mode='a', header=False, index=False)
     else:
         new_df.to_csv(f'{from_date}.csv', mode='a', header=headers, index=False)
-"""
-
-"""
 #rdx= security_wise_archive(current_date,current_date,"silverbees",drop = False)
 #rdx.loc[0] = ['17-05-2024', 'Bankbees', 1000, 200000, 800, 80]
 dfx = security_wise_archive(current_date,current_date,"itbees",drop = False)
@@ -147,7 +146,6 @@ for counter,i in enumerate(my_list):
        security_wise_archive(current_date,current_date,i,drop=False)
     else:
        security_wise_archive(current_date, current_date,i,drop=True)
-"""
 
 #Multi threading
 
@@ -192,9 +190,9 @@ csvfile= f'{current_date}.csv'
 pdffile= f'{current_date}.pdf'
 """
 fp = open(fileToSend)
-    # Note: we should handle calculating the charset
-    attachment = MIMEText(fp.read(), _subtype=subtype)
-    fp.close()
+# Note: we should handle calculating the charset
+attachment = MIMEText(fp.read(), _subtype=subtype)
+fp.close()
 attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
 msg.attach(attachment)
 """
