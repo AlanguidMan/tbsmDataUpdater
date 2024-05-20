@@ -39,8 +39,8 @@ holidays2024 = {
 EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
-#current_date = datetime.datetime.now().strftime("%d-%m-%Y")
-current_date = "18-01-2024"
+current_date = datetime.datetime.now().strftime("%d-%m-%Y")
+#current_date = "18-01-2024"
 print(current_date)
 csvfile= f'{current_date}.csv'
 pdffile= f'{current_date}.pdf'
@@ -82,7 +82,7 @@ def format_as_crores(x):
 def mailSend():
     start_time = time.time()
     sender_email = EMAIL_SENDER
-    recipient_email = "vamiy71000@mcatag.com"
+    recipient_email = "tradersbarstockmarket@gmail.com"
     subject = f"Delivery position for {current_date} "
     password = EMAIL_PASSWORD
     msg = MIMEMultipart()
