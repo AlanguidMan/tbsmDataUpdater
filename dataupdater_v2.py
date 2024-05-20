@@ -87,7 +87,7 @@ def mailSend():
     password = EMAIL_PASSWORD
     msg = MIMEMultipart()
     msg["From"] = sender_email
-    msg["To"] = recipient_email1
+    msg["To"] = recipient_email
     msg["Subject"] = subject
     msg.preamble = subject
     f= open(csvfile)
