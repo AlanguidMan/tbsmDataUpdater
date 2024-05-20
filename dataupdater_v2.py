@@ -1,6 +1,3 @@
-
-
-
 import pandas as pd
 import mimetypes
 from datetime import datetime
@@ -141,7 +138,10 @@ print(rdx)
 html_table = rdx.to_html()
 subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
 pdfkit.from_string(html_table, f'{current_date}.pdf')
-
+end_time = time.time()
+exe_time = end_time - start_time
+print("Data fetched and converted in: ", exe_time)
+"""
 for counter,i in enumerate(my_list):
     if counter == 0:
        security_wise_archive(current_date,current_date,i,drop=False)
@@ -177,10 +177,7 @@ end_time = time.time()
 execution_time = end_time - start_time
 print(f"Execution time: {execution_time} seconds")
 """
-rdx.to_csv(f"{current_date}.csv")
-html_table = rdx.to_html()
-subprocess.run(['sudo','apt-get', 'install', 'wkhtmltopdf'])
-pdfkit.from_string(html_table, f'{current_date}.pdf')
+start_time = time.time()
 sender_email = "tradersbardataupdater@outlook.in"
 recipient_email = "dotitebaj.jitavudon@rungel.net"
 subject = f"Delivery position for {current_date} "
@@ -219,5 +216,6 @@ server.quit()
 SendTelegramFile(csvfile)
 SendTelegramFile(pdffile)
 end_time = time.time()
-execution_time = end_time - start_time
-SendMessageToTelegram(f"Execution time: {execution_time} seconds")
+exim = end_time - start_time
+print("email sent in: ", exim)
+#SendMessageToTelegram(f"Execution time: {execution_time} seconds")
