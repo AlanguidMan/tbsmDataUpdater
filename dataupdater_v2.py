@@ -122,7 +122,7 @@ my_list = [
     "mom30ietf", "smallcap", "alpha",
     "goldbees", "silverbees", "mon100",
     "masptop50", "mafang", "morealty",
-    "ltgiltbees", "esg"
+    "ltgiltbees", "esg","ALPL30IETF"
 ]
 
 def security_wise_archive(from_date, to_date, symbol, drop, series="ALL"):
