@@ -15,4 +15,4 @@ jobs:
         run: sudo apt full-upgrade -y
 
       - name: Print System Time
-        run: echo "Current time: $(date)"
+        run: python factSheet.py
