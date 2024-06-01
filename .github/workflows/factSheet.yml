@@ -16,4 +16,3 @@ jobs:
 
       - name: Print System Time
         run: echo "Current time: $(date)"
-        
