@@ -1,0 +1,19 @@
+name: Print System Time
+
+on:
+  workflow_dispatch:  # Triggered manually
+
+jobs:
+  print_time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update apt package lists
+        run: sudo apt update
+
+      - name: Upgrade installed packages
+        run: sudo apt upgrade -y
+
+      - name: Print System Time
+        run: echo "Current time: $(date)"
+        
