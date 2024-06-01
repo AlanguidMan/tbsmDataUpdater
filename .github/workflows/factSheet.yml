@@ -12,7 +12,7 @@ jobs:
         run: sudo apt update
 
       - name: Upgrade installed packages
-        run: sudo apt upgrade -y
+        run: sudo apt full-upgrade -y
 
       - name: Print System Time
         run: echo "Current time: $(date)"
