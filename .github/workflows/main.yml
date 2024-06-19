@@ -20,9 +20,8 @@ jobs:
           python-version: '3.10' 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install numpy==1.20.3
-          pip install pandas==2.0.3 nsepython requests pdfkit
+          python -m pip install --upgrade 
+          pip install pandas nsepython requests pdfkit
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Update package list
