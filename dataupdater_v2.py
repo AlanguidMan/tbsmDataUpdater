@@ -39,8 +39,8 @@ holidays2024 = {
 EMAIL_SENDER = os.environ.get("EMAIL_SENDER")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
-#current_date = datetime.datetime.now().strftime("%d-%m-%Y")
-current_date = "18-06-2024"
+current_date = datetime.datetime.now().strftime("%d-%m-%Y")
+#current_date = "18-06-2024"
 print(current_date)
 csvfile= f'{current_date}.csv'
 pdffile= f'{current_date}.pdf'
