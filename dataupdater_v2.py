@@ -178,9 +178,9 @@ if not rdx.empty:
     end_time = time.time()
     exe_time = end_time - start_time
     print("Data fetched and converted in: ", exe_time)
-    mailSend()
     SendTelegramFile(csvfile)
     SendTelegramFile(pdffile)
+    mailSend()
     final_end_time = time.time()
     totime = final_end_time-startime
     print("Code executed in:", totime)
