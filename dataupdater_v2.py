@@ -111,7 +111,7 @@ def mailSend():
     
 
 my_list = [
-    "Niftybees", "bankbees", "hdfcsensex",
+    "Niftybees","setfnif50", "bankbees", "hdfcsensex",
     "nv20ietf", "juniorbees", "monifty500",
     "midcap", "midcapetf", "hdfcsml250",
     "pvtbanietf", "psubnkbees", "bfsi",
