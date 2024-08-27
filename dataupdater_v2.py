@@ -111,18 +111,20 @@ def mailSend():
     
 
 my_list = [
-    "Niftybees","setfnif50", "bankbees", "hdfcsensex",
+    "Niftybees","niftyietf","setfnif50", "bankbees",
+    "bankietf","hdfcsensex",
     "nv20ietf", "juniorbees", "monifty500",
     "midcap", "midcapetf", "hdfcsml250",
     "pvtbanietf", "psubnkbees", "bfsi",
     "cpseetf", "icicib22", "autobees",
-    "itbees", "tnidetf", "pharmabees",
+    "itbees","itietf", "tnidetf", "pharmabees",
     "healthy", "infraietf", "makeindia",
     "consumbees", "Commoietf", "Lowvolietf",
     "mom30ietf", "smallcap", "alpha",
     "goldbees", "silverbees", "mon100",
     "masptop50", "mafang", "morealty",
-    "ltgiltbees", "esg","ALPL30IETF","oilietf"
+    "ltgiltbees", "esg","ALPL30IETF","oilietf",
+    "metalietf","modefence"
 ]
 
 def security_wise_archive(from_date, to_date, symbol, drop, series="ALL"):
