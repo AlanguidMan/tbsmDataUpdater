@@ -1,6 +1,18 @@
 import streamlit as st
 import numpy as np
+
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import matplotlib
+except ImportError:
+    install('matplotlib')
 import matplotlib.pyplot as plt
+print("Installed Matplotlib")
 
 def calculate_compound_interest(principal, rate, time):
     amount = principal * (1 + rate) ** time
