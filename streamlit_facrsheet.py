@@ -29,5 +29,10 @@ if st.button("Download PDF"):
             file_name="ind_nifty50.pdf",
             mime="application/pdf"
         )
+        
+        # Display the response headers in a table
+        st.subheader("Response Headers")
+        headers_dict = {key: value for key, value in response.headers.items()}
+        st.table(headers_dict.items())
     else:
         st.error("Failed to download the PDF. Please try again later.")
