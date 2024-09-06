@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import pandas as pd
 
 # URL of the PDF file
 pdf_url = "https://niftyindices.com/Factsheet/ind_nifty50.pdf"
@@ -30,9 +31,23 @@ if st.button("Download PDF"):
             mime="application/pdf"
         )
         
-        # Display the response headers in a table
+        # Display the response headers in a mobile-friendly table
         st.subheader("Response Headers")
-        headers_dict = {key: value for key, value in response.headers.items()}
-        st.table(headers_dict.items())
+        
+        # Prepare headers for display
+        headers_dict = {
+            "Header": ["Date", "Last-Modified", "Content-Length (MB)"],
+            "Value": [
+                response.headers.get("Date"),
+                response.headers.get("Last-Modified"),
+                f"{int(response.headers.get('Content-Length', 0)) / (1024 * 1024):.2f} MB"
+            ]
+        }
+        
+        # Create a DataFrame for better display
+        headers_df = pd.DataFrame(headers_dict)
+        
+        # Display the DataFrame
+        st.dataframe(headers_df, use_container_width=True)
     else:
         st.error("Failed to download the PDF. Please try again later.")
