@@ -15,12 +15,6 @@ except ImportError:
     import plotly.graph_objects as go
 
 try:
-    import seaborn as sns
-except ImportError:
-    install('seaborn')
-    import seaborn as sns
-
-try:
     from bokeh.plotting import figure, show
     from bokeh.io import output_notebook
 except ImportError:
@@ -58,7 +52,7 @@ adjusted_amounts = [adjust_for_inflation(amount, inflation_rate, t) for t, amoun
 present_values = [calculate_present_value(adjusted_amount, inflation_rate, t) for t, adjusted_amount in enumerate(adjusted_amounts)]
 
 # Dropdown for selecting graph type
-graph_type = st.selectbox("Select Graph Type:", ["Plotly", "Matplotlib", "Seaborn", "Bokeh"])
+graph_type = st.selectbox("Select Graph Type:", ["Plotly", "Matplotlib", "Bokeh"])
 
 # Plotting with selected library
 if graph_type == "Plotly":
@@ -87,25 +81,7 @@ elif graph_type == "Matplotlib":
     ax.grid()
     st.pyplot(fig)
 
-elif graph_type == "Seaborn":
-    import matplotlib.pyplot as plt
-    sns.set(style="whitegrid")
-    plt.figure(figsize=(10, 6))
-    plt.plot(range(time_period + 1), amounts, marker='o', label='Future Value with Compound Interest')
-    plt.plot(range(time_period + 1), adjusted_amounts, marker='o', label='Inflation Adjusted Amount')
-    plt.plot(range(time_period + 1), present_values, marker='o', label='Present Value of Inflation Adjusted Amount')
-
-    plt.title('Compound Interest, Inflation Adjustment, and Present Value')
-    plt.xlabel('Years')
-    plt.ylabel('Amount ($)')
-    plt.legend()
-    plt.grid()
-    st.pyplot(plt)
-
 elif graph_type == "Bokeh":
-    from bokeh.plotting import figure, show
-    from bokeh.io import output_notebook
-
     p = figure(title="Compound Interest, Inflation Adjustment, and Present Value", x_axis_label='Years', y_axis_label='Amount ($)')
     p.line(range(time_period + 1), amounts, legend_label='Future Value with Compound Interest', line_width=2, color='blue')
     p.line(range(time_period + 1), adjusted_amounts, legend_label='Inflation Adjusted Amount', line_width=2, color='orange')
@@ -118,4 +94,3 @@ st.subheader("Results")
 st.write(f"Future Value with Compound Interest after {time_period} years: ${amounts[-1]:.2f}")
 st.write(f"Inflation Adjusted Amount after {time_period} years: ${adjusted_amounts[-1]:.2f}")
 st.write(f"Present Value of Inflation Adjusted Amount: ${present_values[-1]:.2f}")
-    
