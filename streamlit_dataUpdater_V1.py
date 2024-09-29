@@ -27,9 +27,6 @@ st.title("Data Updater V1.0")
 from_date = st.date_input("From Date", datetime.today())
 to_date = st.date_input("To Date", datetime.today())
 
-# User selection for symbol
-selected_symbol = st.selectbox("Select a Symbol", my_list)
-
 # Function to fetch and format data
 def format_number(amount):
     if amount >= 10000000:
@@ -60,3 +57,16 @@ def security_wise_archive(from_date, to_date, symbol, series="ALL"):
         headers = ['Date', 'Symbol', 'Total Traded Qty', 'Total Traded Value', 'Total Delivery Quantity', 'Delivery Percentage']
         new_df.columns = headers
         return new_df
+
+# Loop through the list and append result to a new list
+result_list = []
+for symbol in my_list:
+    df = security_wise_archive(from_date, to_date, symbol)
+    if df is not None:
+        result_list.append(df)
+
+# Concatenate the result list into a single dataframe
+final_df = pd.concat(result_list, ignore_index=True)
+
+# Display the final dataframe as a table
+st.write(final_df)
