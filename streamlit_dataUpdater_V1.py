@@ -71,4 +71,5 @@ for symbol in my_list:
 final_df = pd.concat(result_list, ignore_index=True)
 
 # Display the final dataframe as a table
-st.write(final_df)
+#st.write(final_df)
+st.write(final_df.to_html(escape=False), unsafe_allow_html=True)
