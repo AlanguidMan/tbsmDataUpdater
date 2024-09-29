@@ -24,9 +24,11 @@ my_list = [
 st.title("Data Updater V1.0")
 
 # User input for dates
-from_date = st.date_input("From Date", datetime.today())
-to_date = st.date_input("To Date", datetime.today())
+#from_date = st.date_input("From Date", datetime.today())
+#to_date = st.date_input("To Date", datetime.today())
 
+from_date= "26-09-2024"
+to_date = "26-09-2024"
 # Function to fetch and format data
 def format_number(amount):
     if amount >= 10000000:
