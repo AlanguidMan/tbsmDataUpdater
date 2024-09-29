@@ -113,6 +113,7 @@ selected_url = urls[url_names.index(selected_url_name)]
 #selected_url = st.selectbox("Select a URL:", urls)
 
 # Button to check status
+
 if st.button("Check Status"):
     try:
         headers = {
@@ -123,12 +124,14 @@ if st.button("Check Status"):
         last_modified = response.headers.get("Last-Modified", "Not available")
         content_length = response.headers.get("Content-Length", "0")
         
+        # Convert content length to MB
+        content_length_mb = int(content_length) / (1024 * 1024) if content_length != "0" else 0
+        
         st.write("Last Modified:", last_modified)
-        st.write("Content Length:", content_length)
+        st.write("Content Length: {:.2f} MB".format(content_length_mb))
 
         # Provide a download link if the content length is greater than 0
-        if int(content_length) > 0:
+        if content_length_mb > 0:
             st.markdown(f"[Download File]({selected_url})", unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error checking the URL: {e}")
-        
