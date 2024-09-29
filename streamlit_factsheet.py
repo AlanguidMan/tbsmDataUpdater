@@ -104,8 +104,13 @@ urls = [
 
 st.title("URL Status Checker")
 
+selected_url_name = st.selectbox("Select a URL:", url_names)
+
+# Find the corresponding URL
+selected_url = urls[url_names.index(selected_url_name)]
+
 # Dropdown menu for URLs
-selected_url = st.selectbox("Select a URL:", urls)
+#selected_url = st.selectbox("Select a URL:", urls)
 
 # Button to check status
 if st.button("Check Status"):
