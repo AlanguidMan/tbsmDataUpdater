@@ -101,7 +101,7 @@ urls = [
     "https://niftyindices.com/Factsheet/Factsheet_Nifty_Alpha_Low-Volatility_30.pdf",
     "https://niftyindices.com/Factsheet/Factsheet_Nifty200_Momentum30.pdf"
 ]
-
+url_names = [url.split("Factsheet/")[-1] for url in urls]
 st.title("URL Status Checker")
 
 selected_url_name = st.selectbox("Select a URL:", url_names)
