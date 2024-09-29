@@ -135,3 +135,26 @@ if st.button("Check Status"):
             st.markdown(f"[Download File]({selected_url})", unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error checking the URL: {e}")
+
+
+recently_updated = []
+
+for url in urls:
+    try:
+        response = requests.get(url, headers=headers)
+        last_modified = response.headers.get("Last-Modified")
+
+        if last_modified:
+            last_modified_date = datetime.strptime(last_modified, "%a, %d %b %Y %H:%M:%S GMT")
+            if datetime.utcnow() - last_modified_date < timedelta(days=30):
+                recently_updated.append(url.split("Factsheet/")[-1])
+    except Exception as e:
+        continue
+
+# Display recently updated files
+if recently_updated:
+    st.subheader("Recently Updated Files")
+    for file_name in recently_updated:
+        st.write(file_name)
+else:
+    st.write("No recently updated files found.")
